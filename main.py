@@ -12,6 +12,10 @@ SCREEN_HEIGHT = 600
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Fighter")
 
+#set framerate so that fighters move normally
+clock = pygame.time.Clock()
+FPS = 60
+
 #load background image
 bg_image = pygame.image.load("D:/laravel/fighting_game/assets/images/background/background.gif").convert_alpha()
 
@@ -29,6 +33,8 @@ fighter_2 = Fighter(700, 310)
 #game loop so that the game window doesn't shut off
 run = True
 while run:
+
+    clock.tick(FPS)
 
     #draw background
     draw_bg()
