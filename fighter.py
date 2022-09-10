@@ -6,7 +6,7 @@ class Fighter():
         #creates rectangle object
         self.rect = pygame.Rect((x, y, 80, 180))
 
-    def move(self):
+    def move(self, screen_width):
         SPEED = 10
         #dx and dy are the changes in the x and y coordinates
         dx = 0
@@ -20,7 +20,17 @@ class Fighter():
             dx = -SPEED
 
         if key[pygame.K_d]:
-            dx = SPEED  
+            dx = SPEED 
+
+        #makes sure player stays on screen
+        #for example, it can't go lower than zero, otherwise it will go off the screen
+        if self.rect.left + dx < 0:
+            dx = 0 - self.rect.left 
+
+        #same thing for the right side
+        #if it goes higher than the screen_width, it stops
+        if self.rect.right + dx > screen_width:
+            dx = screen_width - self.rect.right
             
         #update player position
         self.rect.x += dx
