@@ -10,7 +10,7 @@ SCREEN_HEIGHT = 600
 
 #makes the game window
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Fighter")
+pygame.display.set_caption("Fighterz")
 
 #set framerate so that fighters move normally
 clock = pygame.time.Clock()
@@ -34,13 +34,14 @@ fighter_2 = Fighter(700, 310)
 run = True
 while run:
 
+    #runs at 60 fps otherwise it will move too fast
     clock.tick(FPS)
 
     #draw background
     draw_bg()
 
     #move fighters
-    fighter_1.move(SCREEN_WIDTH, SCREEN_HEIGHT)
+    fighter_1.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen)
     #fighter_2.move()
 
     #draw fighters
