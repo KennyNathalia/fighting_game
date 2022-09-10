@@ -5,6 +5,7 @@ class Fighter():
     def __init__(self, x, y):
         #creates rectangle object
         self.rect = pygame.Rect((x, y, 80, 180))
+        self.vel_y = 0
 
     def move(self, screen_width):
         SPEED = 10
@@ -21,6 +22,13 @@ class Fighter():
 
         if key[pygame.K_d]:
             dx = SPEED 
+
+        #jump
+        #is negative number because negative in the y direction is up
+        if key[pygame.K_w]:
+            self.vel_y = -30
+
+        dy += self.vel_y
 
         #makes sure player stays on screen
         #for example, it can't go lower than zero, otherwise it will go off the screen
