@@ -6,6 +6,9 @@ class Fighter():
         self.size = data[0]
         self.flip = False
         self.animation_list = self.load_images(sprite_sheet, animation_steps)
+        self.action = 0 #0:idle. 1:run. 2: jump. 3:attack. 4:attack2. 5:hit. 6:death.
+        self.frame_index = 0
+        self.image = self.animation_list[self.action][self.frame_index]
         self.rect = pygame.Rect((x, y, 80, 180))
         self.vel_y = 0
         self.jump = False
@@ -15,6 +18,8 @@ class Fighter():
 
     def load_images(self, sprite_sheet, animation_steps):
         #extract images from spritesheet
+        #the first for loop is goes down and up, the second one goes from left to right
+        #enumerate increases the y variable if done with a row and goes to the next row
         animation_list = []
         for y, animation in enumerate(animation_steps):
             temp_img_list = []
@@ -104,6 +109,8 @@ class Fighter():
         pygame.draw.rect(surface, (0, 150, 0), attacking_rect)
 
     #draws the fighter
+    #blitting is drawing
     def draw(self, surface): 
         #gives the rectangle a color
         pygame.draw.rect(surface, (255, 0, 0), self.rect)
+        surface.blit(self.image, (self.rect.x, self.rect.y))
