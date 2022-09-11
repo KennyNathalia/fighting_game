@@ -36,6 +36,7 @@ def draw_bg():
 #the health bar width changes depending on the ratio
 def draw_health_bar(health, x, y):
     ratio = health / 100
+    pygame.draw.rect(screen, WHITE, (x - 2, y - 2, 404, 34))
     pygame.draw.rect(screen, RED, (x, y, 400, 30))
     pygame.draw.rect(screen, YELLOW, (x, y, 400 * ratio, 30))
 
@@ -48,7 +49,7 @@ fighter_2 = Fighter(700, 310)
 run = True
 while run:
 
-    #runs at 60 fps otherwise it will move too fast
+    #runs at 60 fps otherwise it will move too fastd
     clock.tick(FPS)
 
     #draw background
