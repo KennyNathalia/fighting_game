@@ -21,8 +21,30 @@ RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 WHITE = (255, 255, 255)
 
+#define fighter variables
+WARRIOR_SIZE = 162
+WARRIOR_DATA = [WARRIOR_SIZE]
+WIZARD_SIZE = 200
+WIZARD_DATA = [WIZARD_SIZE]
+# YUSUKE_SIZE = 83
+# YUSUKE_DATA = [YUSUKE_SIZE]
+# FRIEZA_SIZE = 99
+# FRIEZA_DATA = [FRIEZA_SIZE]
+
 #load background image
-bg_image = pygame.image.load("D:/laravel/fighting_game/assets/images/background/background.gif").convert_alpha()
+bg_image = pygame.image.load("assets/images/background/background.gif").convert_alpha()
+
+#load spritesheets
+warrior_sheet = pygame.image.load("assets/images/warrior/sprites/warrior.png").convert_alpha()
+wizard_sheet = pygame.image.load("assets/images/wizard/sprites/wizard.png").convert_alpha()
+# yusuke_sheet = pygame.image.load("assets/images/yusuke/sprites/yusuke.png").convert_alpha()
+# frieza_sheet = pygame.image.load("assets/images/frieza/sprites/frieza.png").convert_alpha()
+
+#define number of steps in each animation
+WARRIOR_ANIMATION_STEPS = [10, 8, 1, 7, 7, 3, 7]
+WIZARD_ANIMATION_STEPS = [8, 8, 2, 10, 10, 3, 7]
+#YUSUKE_ANIMATION_STEPS = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 1, 10, 8, 10, 9, 10, 10, 10, 7]
+#FRIEZA_ANIMATION_STEPS = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 2, 10, 10, 10, 5]
 
 #function for drawing the background
 #blitting is drawing
@@ -42,8 +64,8 @@ def draw_health_bar(health, x, y):
 
 
 #create two fighter instances
-fighter_1 = Fighter(200, 310)
-fighter_2 = Fighter(700, 310)
+fighter_1 = Fighter(200, 310, WARRIOR_DATA, warrior_sheet, WARRIOR_ANIMATION_STEPS)
+fighter_2 = Fighter(700, 310, WIZARD_DATA, wizard_sheet, WIZARD_ANIMATION_STEPS)
 
 #game loop so that the game window doesn't shut off
 run = True

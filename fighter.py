@@ -2,14 +2,27 @@ import pygame
 
 class Fighter():
     #constructor
-    def __init__(self, x, y):
-        #creates rectangle object
+    def __init__(self, x, y, data, sprite_sheet, animation_steps):
+        self.size = data[0]
+        self.flip = False
+        self.animation_list = self.load_images(sprite_sheet, animation_steps)
         self.rect = pygame.Rect((x, y, 80, 180))
         self.vel_y = 0
         self.jump = False
         self.attacking = False
         self.attackType = 0
         self.health = 100
+
+    def load_images(self, sprite_sheet, animation_steps):
+        #extract images from spritesheet
+        animation_list = []
+        for y, animation in enumerate(animation_steps):
+            temp_img_list = []
+            for x in range(animation):
+                temp_img = sprite_sheet.subsurface(x * self.size, y * self.size, self.size, self.size)
+                temp_img_list.append(temp_img)
+            animation_list.append(temp_img_list)
+        return animation_list
 
     def move(self, screen_width, screen_height, surface, target):
         SPEED = 10
@@ -66,6 +79,13 @@ class Fighter():
             self.vel_y = 0
             self.jump = False
             dy = screen_height - 110 - self.rect.bottom
+
+        #makes sure that the players face eachother
+        #if the target is on the right hand side of the player, there is no need to flip
+        if target.rect.centerx > self.rect.centerx:
+            self.flip = False
+        else: 
+            self.flip = True
             
         #update player position
         self.rect.x += dx
@@ -74,7 +94,7 @@ class Fighter():
 
     def attack(self, surface, target):
         self.attacking = True
-        attacking_rect = pygame.Rect(self.rect.centerx, self.rect.y, 2 * self.rect.width, self.rect.height)
+        attacking_rect = pygame.Rect(self.rect.centerx - (2 * self.rect.width * self.flip) , self.rect.y, 2 * self.rect.width, self.rect.height)
 
         #check collision
         if attacking_rect.colliderect(target.rect):
